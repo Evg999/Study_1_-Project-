@@ -1,0 +1,662 @@
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}  */
+/* добиваемся кроссбраузорности, обнуляем */
+@import url(normalize.css);
+/* подтягиваем дополнительный фаел css(rjyakbrn c border*/
+
+.wrapper {
+  max-width: 1200px;
+  /* для адаптивности дабовляем условие макс ширины */
+  margin-left: auto;
+  margin-right: auto;
+  /* border: #1529b9 solid 5px; */
+  font-family: Arial;
+}
+.header {
+  background: #1529b991;
+  padding: 20px;
+  /* сделать отступ от края и расширить цветовой блок */
+  display: flex;
+  justify-content: space-between;
+  /* равное расстояние между элементами внутри */
+  align-items: center;
+  /* изначально stretch растянуть, можем выравнить */
+  position: fixed;
+  /* закрепить блок при прокрутки */
+  top: -90px;
+  left: 0;
+  right: 0;
+  /* bottom: 0; */
+  max-width: 1200px;
+  /* максимальная ширина, шире быть не может меньше может , задаём размеры*/
+  margin: 0 auto;
+  /* выравниваем по центу */
+  box-sizing: border-box;
+  /* падинги и бордеры внутурь */
+  z-index: 1;
+  /* по умолчанию все position имеют 0 приоритет отдан тому кто ниже по коду, данное свойство позволяет приоритет поменять */
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0;
+    /* визуально прозрачный объект */
+    /* по умолчанию transform: rotate(0); */
+  }
+  40% {
+    opacity: 1;
+    /* 100% видимый */
+    transform: translate(200px, 0) rotate(360deg) scale(1, 1);
+    /* 1сдвиг Х и У (по верх сеседа) 2крутить объект 3увелечение маштаба(множнтель кол-во (1)*/
+  }
+  60% {
+    opacity: 1;
+    transform: translate(200px, 0) rotate(360deg) scale(-1, 1);
+    /* (множетель (0) всхлопнит и появиться, так же 2(второй) множителя можно ставить горизонталь и вертекаль,
+        +свойство если горизонталь-1 вертикаль 1 (-1 1) объект зеркально разворачивается*/
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0) scale(-1);
+  }
+  /* 100% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(0deg);
+
+
+    обратное движение не озательно состовлять на отрезке, есть свойство alternate если оно должно быть такое же
+
+    margin-left: 200px; сдвиг, если нужно отодвинуть соседний прилегающей объект(вместе)
+    } */
+}
+.logo {
+  animation: logo 3s linear infinite forwards;
+  /* используем для объекта созданные условия для анимирования.1имя2длятельность3условия линейная в инструменте на стр.возможно поменять скорость
+    4время задержки анимации (в сек s)5условие проигровать бесконечно(infinite) или задать числом, сколько раз, объект вернётся в исходное состояние 
+    6animation-fill-mode: forwards;
+    по умолчанию свойство backwards(вернуть в исходное состояние) 
+    меняем при необходимости на forwards если объект должен уходить "закат"
+    7 обратное движение не обезательно состовлять на отрезке, есть свойство alternate*/
+  background: url(img/logo.png) no-repeat center center / contain;
+  padding: 25px;
+  /* transition: 1000ms; */
+}
+.logo:hover {
+  animation-play-state: paused;
+  /* данное условия при наведение анимацию останавливает */
+  /* hover условия при наведение */
+  /* transform: rotate(360deg); */
+  /* декорация поворот на 360 логотип работает с блочными элементами, к элементу если пременён flex будет работать*/
+  /* padding: 27px; */
+  /* transition: 1000ms;  */
+  /* но в hover  делать не желательно-мышь уводим резкий скачёк */
+  /* 1s=1000ms */
+  /* плавность перехода */
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+  /* убрать подчёркивание у ссылки */
+  margin-left: 15px;
+  /* сделать отступ между ссылками */
+  font-size: 25px;
+  position: relative;
+  /* для header-link:before относительно этих ссылок */
+}
+.header-link:before {
+  content: "";
+  position: absolute;
+  /* 2 обезательных условия */
+  height: 2px;
+  width: 0;
+  /* 0 так как делаем условия для появления при наведение */
+  background: white;
+  /* отрисовали элемент(палочку для подчёркивания) */
+  bottom: -3px;
+  transition: 0.3s;
+  /* устонавили где находиться и задали время для появления */
+}
+.header-link:hover:before {
+  width: 100%;
+  /* text-decoration: underline; */
+  /* нижнее подчёркивание у ссылок на всю ширину */
+}
+.stick-right::before {
+  /* left: 0;  */
+  right: 0;
+  margin: auto;
+  /* справа налево */
+}
+.stick-center:before {
+  left: 0;
+  right: 0;
+  margin: auto;
+  /* из центра в стороны */
+}
+
+/* для мобильных */
+.menu-button {
+  background: url(img/menu.svg) center center / contain no-repeat;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: none;
+}
+/* для мобильных */
+
+.picturelake {
+  background: url(img/main.jpg) no-repeat center center / cover;
+  height: 735px;
+  position: relative;
+  /* относительно чего- нужно обозначить */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* для центрирования внутри флекс контейнера */
+}
+
+.comon-center {
+  text-align: center;
+}
+@keyframes fly-rocket {
+  0% {
+    transform: translate(-20px, -20px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.rocket-animation {
+  animation: fly-rocket 1s infinite alternate;
+  position: relative;
+  display: inline-block;
+  /* свойство подстраивает блок под его содержимое т.е. под ракету, плюс отступ при не обходимости делаеться не через всю ширину. */
+}
+
+.rocket {
+  width: 150px;
+}
+
+@keyframes fire {
+  0% {
+    transform: translate(1px, -1px) skew(3deg, 3deg);
+  }
+  100% {
+    transform: translate(-1px, 1px) skew(3deg, 3deg);
+  }
+}
+
+.fire {
+  animation: fire 0.06s infinite alternate;
+  width: 40px;
+  position: absolute;
+  right: 14px;
+  bottom: 16px;
+  z-index: -1;
+}
+
+.center-block {
+  position: relative;
+  /* text-align: center; */
+  /* для центрирования текста внутри блока */
+}
+.center-block h2 {
+  color: white;
+  font-size: 36px;
+}
+.center-block a {
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+  background: #1529b9;
+  padding: 14px;
+  position: absolute;
+  position: relative;
+}
+
+.link:before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #fdc931;
+  transition: 1s;
+}
+.link:hover:before {
+  transform: rotate(360deg);
+  left: 100%;
+  /* движение слева направо 100% объекта */
+}
+
+.scrool {
+  position: relative;
+  margin-top: 40px;
+  width: 26px;
+  height: 50px;
+  border: 4px solid white;
+  border-radius: 13px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+@keyframes line {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+.line-for-scrool {
+  animation: line 1s infinite;
+  margin-top: 6px;
+  width: 6px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: white;
+}
+@keyframes arrow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(-7px, 7px);
+  }
+}
+.arrow-down {
+  animation: arrow 1s infinite;
+  position: absolute;
+  bottom: -16px;
+  width: 12px;
+  height: 12px;
+  border-bottom: 4px solid white;
+  border-left: 4px solid white;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+}
+
+.social-icons {
+  position: absolute;
+  /* позиционируем иконки относительно картинки */
+  right: 10px;
+  bottom: 20px;
+}
+.social-icons img {
+  width: 50px;
+}
+h1 {
+  background: #1529b9;
+  color: white;
+  margin: 0px;
+  padding: 20px;
+  text-align: center;
+}
+.text {
+  padding: 40px;
+  display: none;
+}
+.bloks {
+  display: flex;
+  flex-wrap: wrap;
+  /* данное свойство разрешает Flex элементам перепрыгивать на следующую строки */
+}
+.bloks-item {
+  padding: 20px;
+  border: 2px solid #1529b9;
+  min-width: 33.33333%;
+  box-sizing: border-box;
+  /* по умолчанию падинги и бордеры нарастают(прибавляються) условия для box-sizing: content-box (стандарт),а мы их границы внутарь напрпавили,
+если нам нужно внутурь бокса то используем border-box */
+  text-align: center;
+  flex-grow: 1;
+  /* данное свойство флекс элемента позволяет занемать элементам место равное друг другу если два элемента 1\2 если три 1\3 */
+  flex-basis: 300px;
+  /* когда элемент не вмещяеться в 400px он перебрасывается( перебевает и невидит width: 33.33333%, нужно изменить на min-width минимальную шируну) */
+}
+.stick {
+  width: 80px;
+  height: 4px;
+  background: orange;
+  margin: 0 auto;
+  /* для блочных центрируем с помощью margin верх и низ 0 слева и справа auto */
+}
+.bloks-item img {
+  /* новая запись внутри родителя, даём свойства картинке без дополнения класса для img */
+  height: 100px;
+}
+.arrows {
+  background: url(img/arrows.png) no-repeat center center / contain;
+  height: 100px;
+  /* высота объекта */
+  width: 100px;
+  /* ширина объекта */
+  position: fixed;
+  /* top: 0px;
+    left: 0px; */
+  right: -100px;
+  /* относительно правой стороны */
+  bottom: -100px;
+  /* относительно правого низа */
+  /* margin: 0 auto; */
+  /* box-sizing: border-box;*/
+  border-radius: 50%;
+  /* квадрат сделать кругом, для круглых объектов */
+  box-shadow: 0 0 5px 1px #2b2a5a;
+  /* исходные данные для тени для объекта */
+}
+.arrows:hover {
+  box-shadow: 0 0 10px 2px #2b2a5a;
+  /* действи при наведение, тени увеличиваються относительно изначальных данных */
+}
+
+.forma-zayavku {
+  text-align: center;
+  color: #5353b5;
+  border: 3px solid #2b2a5a;
+  padding: 100px;
+  position: relative;
+  /* text-align: center; */
+  /* для центрирования текста внутри блока */
+}
+.forma-zayavku a {
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+  background: #1529b9;
+  padding: 14px 70px;
+  position: absolute;
+  position: relative;
+  border: 3px solid orange;
+  margin-top: 20px;
+}
+
+.register {
+  padding: 40px;
+  border: 3px solid #1529b9;
+}
+.form-item {
+  margin-bottom: 10px;
+}
+fieldset {
+  /* объеденяющий блок */
+  padding: 40px;
+  border: 3px solid #1529b9;
+  margin-bottom: 20px;
+}
+legend {
+  padding: 5px;
+  font-weight: 600;
+  font-size: 16px;
+}
+[type="radio"]:checked ~ span {
+  background: #fdc931;
+}
+label {
+  display: block;
+}
+[type="text"],
+[type="number"],
+[type="password"],
+textarea,
+[type="email"],
+[type="date"] {
+  padding: 5px;
+  border: 4px solid orange;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  outline-color: #1529b9;
+  width: 100%;
+  /* размерр 100% */
+}
+textarea {
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+  /* как мы можем изменять textarea (через ползунок) vertical можем изменять по вертикали\min-height для того что бы не всхлоповался 
+    */
+}
+input[type="checkbox"] {
+  /* вернуть значение по умолчанию */
+  width: initial;
+}
+[type="submit"] {
+  background-color: #1529b9;
+  border: 4px solid orange;
+  padding: 5px;
+  /* border: none; */
+  /* отменить бордер */
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  /* для отображения при наведения курсора */
+}
+/* новый синтекс= в квадратный скобках обращаемся к их атрибуту, так же можно обратиться только к определённому значениям, 
+есть возможность перечислять через запятую,box-sizing: border-box добовлять обезательно
+:-webkit-appearance: none свойство позваляет убрать особенности но (вроде не сработало) input:outline-color: #1529b9; позваляет редактировать фокус*/
+.faq {
+  padding: 35px;
+  border: #1529b9 3px solid;
+  border-top: none;
+  border-bottom: none;
+}
+.faq-item {
+  border: #1529b9 3px solid;
+  margin-bottom: 20px;
+}
+.faq-item:last-child {
+  /* обращяемся к последнему эдементу */
+  margin-bottom: 0;
+  /* удаляем отступ снизу */
+}
+.faq-item-question {
+  padding: 15px 10px;
+  background: #1529b9;
+  color: #fff;
+  cursor: pointer;
+}
+.faq-item-answer {
+  padding: 15px 10px;
+  background: #fff;
+  color: #1529b9;
+  display: none;
+}
+.footer {
+  background-color: #1529b9;
+  padding: 23px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.blok {
+  flex-grow: 1;
+  flex-basis: 300px;
+  text-align: center;
+}
+.footer-links a {
+  color: white;
+  display: block;
+  /* свойство делает строчный элемент, блочным(делаем для того что бы строрчные шли друг под другом) */
+  text-decoration: none;
+  margin-bottom: 15px;
+  text-align: right;
+}
+.orange {
+  color: #ffef09;
+  font-weight: 200;
+  font-size: 32px;
+  margin-bottom: -8px;
+  margin-top: 0px;
+}
+.street {
+  color: #ffef09;
+  font-size: 15px;
+}
+.info {
+  color: white;
+}
+.social-icons-footer img {
+  width: 50px;
+}
+/* размер соц иконок */
+
+.screen {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(21, 40, 185, 0.575);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  /* display: none; */
+  /* временно скрыли */
+}
+.screen-center {
+  background-color: white;
+  padding: 20px;
+  border: 3px solid orange;
+  position: relative;
+  width: 400px;
+}
+.logo-forma {
+  width: 90px;
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  /* для выравнивания по центру  */
+}
+.krestik-box {
+  width: 30px;
+  height: 30px;
+  background-color: orange;
+  position: absolute;
+  right: -25px;
+  top: -23px;
+}
+.krestik-box:before {
+  transform: rotate(45deg);
+}
+.krestik-box:after {
+  transform: rotate(-45deg);
+}
+/* псевдо элементы(какое мы действие задаём) разворачиваем каждую в последствие получиться крест */
+
+.krestik-box:before,
+.krestik-box:after {
+  position: absolute;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+  top: -2px;
+  left: 14px;
+  /* делаем сами палочки(высота ширина окрас) и задаём позицию */
+}
+
+.common-cookies {
+  background: #1529b991;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -200px;
+  z-index: 3;
+}
+
+.blok-cookies {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: space-between;
+  max-width: 1200px;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+}
+
+.pizza {
+  height: 110px;
+}
+
+.text-cookies {
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.i-understand {
+  background: orange;
+  border: 3px solid white;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px 20px;
+}
+
+/* media queries */
+@media (max-width: 890px) {
+  .nav {
+    /* display: none; */
+    background: rgba(0, 0, 0, 0.651);
+    position: absolute;
+    left: 100%;
+    /* left: 0; */
+    /* сверху в низ */
+    top: 0;
+    margin: 0;
+    padding: 10px;
+
+    width: 100%;
+
+    /* display: flex;
+        flex-direction: column; */
+  }
+  .nav a {
+    display: block;
+    padding: 10px;
+  }
+  .menu-button {
+    display: block;
+    z-index: 1;
+  }
+}
+
+.hi {
+  color: white;
+  font-size: 25px;
+  text-align: center;
+}
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  .nav {
+    font-size: 20px;
+  }
+  .header {
+    background: red;
+  }
+}
+@media (min-width: 1001px) {
+  .header {
+    font-size: 24px;
+  }
+  .nav a {
+    margin: 10px 10px;
+    transition: 0.2 s;
+  }
+}

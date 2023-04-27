@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+}
+.slider{
+    position: relative;
+    overflow: hidden;
+    /* мы можем упровлять перенаполностью контента в блоке значение hidden -скрывает\scroll даёт возможность скролить 
+    \auto при необходимости добовляет или горизантальный или вертикальный скрол */
+}
+.slider-line{
+     display: flex; 
+     /*display:none не нужен  */
+     position: relative;
+
+     /* left: -100%; прописываем действие при клики в js */
+     left: 0;
+     /* transition: 0.5s; подключаем animation: ; */
+     /* для плавности перехода теперь left: 0; из начального состояние - 100% js */
+
+}
+.slider-left-button{
+    position: absolute;
+    height: 100%;
+    width: 100px;
+    left: 0;
+    top: 0;
+
+    color: white;
+    font-size: 120px;
+    background: rgba(0, 0, 0, 0.336);
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-right-button{
+    position: absolute;
+    height: 100%;
+    width: 100px;
+    right: 0;
+    top: 0;
+    /* прижемаем к правой стороне и к верху */
+    /* top: 0; стрелка в верху, не под div */
+    color: white;
+    font-size: 120px;
+    background:rgba(0, 0, 0, 0.336) ;
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-line-item{
+    color: white;
+    height: 100vh;
+    font-size: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    min-width: 100%;
+    /* слайды в ширину все */
+}
+
+.slider-line-item:nth-child(1),
+.slider-line-item:nth-last-child(1){
+    /* первый с самого нача и первыс конца должны иметь одинаковые стили */
+
+    background: red;
+    /* display: flex; */
+    /* display: flex; для того чтобы его было видно */
+}
+.slider-line-item:nth-child(2){
+    background: green;
+}
+.slider-line-item:nth-child(3){
+    background: blue;
+}
+.slider-line-item:nth-child(4){
+    background: orange;
+}
+.slider-line-item:nth-child(5){
+    background: pink;
+}
+.slider-line-item:nth-child(6){
+    background: purple;
+}
+.slider-line-item:nth-child(7){
+    background: gray;
+}
